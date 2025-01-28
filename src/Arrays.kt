@@ -1,3 +1,5 @@
+import kotlin.math.*
+
 fun main() {
 //    linearSearch()
 //    largestInArray()
@@ -6,7 +8,10 @@ fun main() {
 //    pairsInArray()
 //    printSubArrays()
 //    maxSubArraySumUsingPrefixSumArray()
-    kadaneAlgorithm()
+//    kadaneAlgorithm()
+//    rainwaterTrapping()
+//    buySellStockForMaxProfit()
+    duplicatesInArray()
 }
 
 fun linearSearch() {
@@ -142,4 +147,58 @@ fun kadaneAlgorithm() {
         }
     }
     println(maxSum)
+}
+
+fun rainwaterTrapping() {
+    val numArray = arrayOf(4, 2, 0, 6, 3, 2, 5)
+
+    val leftMaxArray = IntArray(numArray.size)
+    leftMaxArray[0] = numArray[0]
+    for (i in 1..<numArray.size) {
+        leftMaxArray[i] = max(leftMaxArray[i - 1], numArray[i])
+    }
+
+    val rightMaxArray = IntArray(numArray.size)
+    rightMaxArray[rightMaxArray.size - 1] = numArray[numArray.size - 1]
+    for (i in numArray.size - 2 downTo 0) {
+        rightMaxArray[i] = max(numArray[i], rightMaxArray[i + 1])
+    }
+    var answer = 0
+    for (i in 0..<numArray.size - 1) {
+        val waterLevel = min(leftMaxArray[i], rightMaxArray[i])
+        answer += (waterLevel - numArray[i])
+    }
+
+    println(answer)
+}
+
+fun buySellStockForMaxProfit() {
+    val numArray = arrayOf(7, 1, 5, 3, 6, 4)
+    var maxProfit = Int.MIN_VALUE
+    var buyPrice = Int.MAX_VALUE
+
+    for (i in 0..<numArray.size) {
+        if (buyPrice < numArray[i]) {
+            val profit = numArray[i] - buyPrice
+            maxProfit = max(maxProfit, profit)
+        } else {
+            buyPrice = numArray[i]
+        }
+    }
+
+    println(maxProfit)
+}
+
+fun duplicatesInArray() {
+    val numArray = arrayOf(1, 2, 3, 3)
+    var areDuplicates = false
+
+    for (i in 0..<numArray.size) {
+        for (j in i + 1..<numArray.size) {
+            if (numArray[i] == numArray[j]) {
+                areDuplicates = true
+            }
+        }
+    }
+    println(areDuplicates)
 }
