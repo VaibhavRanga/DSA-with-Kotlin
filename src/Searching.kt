@@ -1,5 +1,5 @@
 fun main() {
-    linearSearch()
+//    linearSearch()
     binarySearch()
 }
 
@@ -20,7 +20,7 @@ fun linearSearch() {
 
 fun binarySearch() {
     val numArray = arrayOf(32, 45, 67, 75, 98, 134, 180)
-    val key = 32
+    val key = 180
     var index = -1
     var start = 0
     var end = numArray.size - 1
@@ -32,10 +32,10 @@ fun binarySearch() {
             index = mid
             break
         } else if (key < numArray[mid]) {
-            end = mid
+            end = mid - 1
         } else {
-            start = mid
+            start = mid + 1
         }
     }
-    println(index)
+    println("Index: $index")
 }
