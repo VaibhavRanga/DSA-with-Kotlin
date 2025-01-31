@@ -1,5 +1,6 @@
 fun main() {
     bubbleSort()
+    selectionSort()
 }
 
 fun bubbleSort() {
@@ -21,6 +22,28 @@ fun bubbleSort() {
     }
 
     for (i in 0..<numArray.size) {
-        println(numArray[i])
+        print("${numArray[i]} ")
     }
+    println()
+}
+
+fun selectionSort() {
+    val numArray = arrayOf(5, 4, 1, 3, 2)
+
+    for (i in 0..<numArray.size - 1) {
+        var minPos = i
+        for (j in i + 1..<numArray.size) {
+            if (numArray[minPos] > numArray[j]) {
+                minPos = j
+            }
+        }
+        val temp = numArray[minPos]
+        numArray[minPos] = numArray[i]
+        numArray[i] = temp
+    }
+
+    for (i in 0..<numArray.size) {
+        print("${numArray[i]} ")
+    }
+    println()
 }
